@@ -27,7 +27,7 @@ def index(bbox: str = "-90,-45,90,45"):
         for poly in polys
     ]
 
-    # priamo DataFrame → GeoDataFrame
+    # DataFrame → GeoDataFrame
     gdf = gpd.GeoDataFrame(pd.DataFrame.from_records(records), crs="EPSG:4326")
 
     # bounding box

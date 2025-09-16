@@ -9,6 +9,7 @@ import type { Countries } from "./types";
 import type geojson from "geojson";
 import { colorForCountry, previewColor } from "./utils";
 import { Loader } from "./loader";
+import { FloatingBox } from "./floating-box";
 
 function addSources(map: mapboxgl.Map, data: Countries) {
 	let i = 0;
@@ -145,6 +146,7 @@ function App() {
 	return (
 		<div className="w-screen h-screen">
 			{loading && <Loader />}
+			<FloatingBox checked={false} onChange={console.log} />
 			<div ref={mapContainerRef} className="w-full h-full" />
 		</div>
 	);

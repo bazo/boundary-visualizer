@@ -9,4 +9,6 @@ class Boundary:
 
 Country = list[Boundary]
 
-CountryList = dict[str, Country]
+CountriesList = dict[str, Country]
+
+CapitalsList = dict[str, tuple[float, float]]
