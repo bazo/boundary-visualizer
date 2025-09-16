@@ -1,6 +1,6 @@
 import csv
 import sys
-from dtos import Point, Boundary, Country, CountryList
+from dtos import Boundary, CountryList
 
 
 def readInput(filePath: str) -> CountryList:
@@ -9,21 +9,21 @@ def readInput(filePath: str) -> CountryList:
     with open(filePath, newline="") as csvfile:
         boundaryReader = csv.reader(csvfile)
         for row in boundaryReader:
-            [boundaryId, countryCode, countryName, points] = row
+            [boundaryId, _, countryName, points] = row
             boundaryId = boundaryId.removeprefix("country:")
-            boundary = Boundary(code=boundaryId, points=readPoints(points))
-            if countryCode not in countryList:
-                countryList[countryCode] = Country(name=countryName, boundaries=[])
-            countryList[countryCode].boundaries.append(boundary)
+            boundary = Boundary(id=boundaryId, p=readPoints(points))
+            if countryName not in countryList:
+                countryList[countryName] = []
+            countryList[countryName].append(boundary)
 
     return countryList
 
 
-def toPoint(pair) -> Point:
+def toLonLat(pair) -> tuple[float, float]:
     [lon, lat] = pair.split(" ")
-    return Point(lon=float(lon), lat=float(lat))
+    return float(lon), float(lat)
 
 
-def readPoints(points: str) -> list[Point]:
+def readPoints(points: str) -> list[tuple[float, float]]:
     pairs = points.split(":")
-    return [toPoint(pair) for pair in pairs]
+    return [toLonLat(pair) for pair in pairs]

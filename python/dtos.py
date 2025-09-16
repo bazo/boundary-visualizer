@@ -1,18 +1,12 @@
 from dataclasses import dataclass
 
-@dataclass
-class Point:
-    lon: float
-    lat: float
-    
-@dataclass
-class Boundary:
-    code: str
-    points: list[Point]
 
 @dataclass
-class Country:
-    name: str
-    boundaries: list[Boundary]
+class Boundary:
+    id: str # boundary id
+    p: list[tuple[float, float]] # list of (lon, lat) tuples
+
+
+Country = list[Boundary]
 
 CountryList = dict[str, Country]
