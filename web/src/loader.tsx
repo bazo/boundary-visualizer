@@ -1,12 +1,7 @@
 export function Loader() {
 	return (
-		<div className="fixed inset-0 flex items-center justify-center bg-black/20 z-50">
-			<div className="flex flex-col items-center">
-				{/* Spinner */}
-				<div className="h-12 w-12 animate-spin rounded-full border-4 border-white border-t-transparent" />
-				{/* Text */}
-				<p className="mt-4 text-white text-lg font-medium">Loading...</p>
-			</div>
+		<div className="fixed top-4 right-4 z-50 bg-transparent rounded-lg p-2 shadow-lg">
+			<div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
 		</div>
 	);
 }

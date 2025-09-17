@@ -36,7 +36,6 @@ def readCapitalsList(filePath: str) -> CapitalsList:
         reader = csv.reader(csvfile)
         next(reader)  # skip header
         for row in reader:
-            print(row)
             [country, capital, lat, lon, _, _] = row
             capitalsList[country] = float(lon), float(lat)
 

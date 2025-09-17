@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from reader import readInput
+from logic import filterMainlands
+from reader import readInput, readCapitalsList
 from fastapi.middleware.cors import CORSMiddleware
 import geopandas as gpd
 import pandas as pd
@@ -18,12 +19,18 @@ app.add_middleware(
 
 
 @app.get("/")
-def index(bbox: str = "-90,-45,90,45"):
+def index(bbox: str = "-90,-45,90,45", mainLandOnly: bool = False) -> dict:
     countryList = readInput("../input/country-borders.csv")
+    capitalsList = readCapitalsList("../input/all-capital-cities-in-the-world.csv")
+
+    filtered = countryList
+
+    if mainLandOnly:
+        filtered = filterMainlands(filtered, capitalsList)
 
     records = [
         {"country": country, "id": poly.id, "geometry": Polygon(poly.p)}
-        for country, polys in countryList.items()
+        for country, polys in filtered.items()
         for poly in polys
     ]
 
@@ -35,8 +42,6 @@ def index(bbox: str = "-90,-45,90,45"):
     query_bounds = box(minx=coords[0], miny=coords[1], maxx=coords[2], maxy=coords[3])
 
     # filter podľa intersects
-    filtered = gdf[gdf.intersects(query_bounds)]
+    intersected = gdf[gdf.intersects(query_bounds)]
 
-    print(filtered)
-
-    return frameToDict(filtered)
+    return frameToDict(intersected)

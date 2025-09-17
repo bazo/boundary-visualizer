@@ -3,12 +3,10 @@ from dataclasses import dataclass
 
 @dataclass
 class Boundary:
-    id: str # boundary id
-    p: list[tuple[float, float]] # list of (lon, lat) tuples
+    id: str  # boundary id
+    p: list[tuple[float, float]]  # list of (lon, lat) tuples
 
 
-Country = list[Boundary]
-
-CountriesList = dict[str, Country]
+CountriesList = dict[str, list[Boundary]]
 
 CapitalsList = dict[str, tuple[float, float]]

@@ -1,18 +1,16 @@
 from reader import readInput, readCapitalsList
-from logic import getMainland
+from logic import filterMainlands
 
 def main():
-    countryList = readInput("../input/country-borders.csv")
+    countriesList = readInput("../input/country-borders.csv")
     capitalsList = readCapitalsList("../input/all-capital-cities-in-the-world.csv")
 
-    for country, boundaries in countryList.items():
-        mainland = getMainland(country, boundaries, capitalsList)
-        if mainland:
-            #print("")
-            print(f"{country}: {mainland.id}")
-        else:
-            #print("")
-            print(f"{country}: no mainland found")
+    filtered = filterMainlands(countriesList, capitalsList)
+
+    for country, boundaries in filtered.items():
+        pass
+        #print(f"{country}: {boundaries[0].id}")
+        print(boundaries[0].id)
 
     
 
