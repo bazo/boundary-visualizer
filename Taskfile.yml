@@ -3,7 +3,48 @@
 version: "3"
 
 tasks:
-    server:
-        dir: python
+    init:
+        dir: server
+        cmds:
+            - uv venv
+
+    bun:
+        dir: web
+        cmds:
+            - bun i
+
+    build:
+        dir: web
+        cmds:
+            - task: bun
+            - bun run build
+
+    dev:web:
+        dir: web
+        cmds:
+            - bun run dev
+
+    dev:server:
+        dir: server
         cmds:
             - uv run fastapi dev server.py
+
+    dev:
+        deps:
+            - dev:server
+            - dev:web
+
+    prod:server:
+        dir: server
+        cmds:
+            - uv run fastapi run server.py
+
+    prod:
+        deps: 
+            - build
+        cmds:
+            - task: prod:server
+
+    docker:
+        cmds:
+            - docker build  -t "boundary-visualiser" --progress=plain .

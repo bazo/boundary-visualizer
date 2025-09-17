@@ -2,14 +2,7 @@
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
 		"ignoreUnknown": true,
-		"includes": [
-			"**/*.mjs",
-			"**/*.ts",
-			"**/*.tsx",
-			"**/*.astro",
-			"!node_modules",
-			"!server/src/prisma"
-		]
+		"includes": ["**/*.mjs", "**/*.ts", "**/*.tsx", "**/*.astro", "!node_modules", "!server/src/prisma"]
 	},
 	"vcs": {
 		"enabled": true,

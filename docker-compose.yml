@@ -1,0 +1,5 @@
+services:
+    boundary-visualiser:
+        image: boundary-visualiser:latest
+        ports:
+            - 8000:8000
