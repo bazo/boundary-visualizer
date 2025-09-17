@@ -1,5 +1,9 @@
 # Solution
 
+## Demo
+
+is accessible on this link https://boundary-visualizer.fly.dev/
+
 ### Prerequisites
 
 If you want to run it directly from code:
