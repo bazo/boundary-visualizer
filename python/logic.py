@@ -1,6 +1,13 @@
 from dtos import Boundary, CapitalsList, CountriesList
 from shapely.geometry import Point, Polygon
 
+countriesWithoutCapitalsOnMainland = [
+    "Denmark",
+    "United Arab Emirates",
+    "Gambia, The",
+    "Equatorial Guinea",
+]
+
 
 def getMainland(
     countryName: str, boundaries: list[Boundary], capitals: CapitalsList
@@ -12,7 +19,7 @@ def getMainland(
 
     # only 4 countries don't have capitals on mainland so we can hardcode them
     # and test the largest polygon
-    if countryName not in capitals:
+    if countryName in countriesWithoutCapitalsOnMainland or countryName not in capitals:
         return findLargestBoundary(boundaries)
 
     # and for other countries compare boundaries with coordinates of capitals
