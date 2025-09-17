@@ -47,4 +47,9 @@ tasks:
 
     docker:
         cmds:
-            - docker build  -t "boundary-visualiser" --progress=plain .
+            - docker build  -t "boundary-visualizer" --progress=plain .
+
+    default:
+        dir: server
+        cmds:
+            - uv run main.py
